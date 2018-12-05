@@ -5,11 +5,14 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"github.com/ivanberry/rest-api/middleware"
 )
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", GetIndex).Methods("GET")
+	router.HandleFunc("/", middleware.WithLogging(middleware.WithTracing(GetIndex))).Methods("GET")
+	router.HandleFunc("/index", middleware.WithLogging(middleware.WithTracing(GetIndex))).Methods("GET")
+
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
