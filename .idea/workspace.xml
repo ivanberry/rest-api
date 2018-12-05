@@ -36,35 +36,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="1671" />
+          <entry key="go" value="1734" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="1671" />
+          <entry key="Go" value="1734" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="e#14#121#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="196">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/middleware/middleware.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+            <state relative-caret-position="812">
+              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
               <folding>
                 <element signature="e#20#49#0" expanded="true" />
               </folding>
@@ -81,8 +78,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/middleware/middleware.go" />
+        <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
@@ -142,7 +139,7 @@
     <property name="SearchEverywhereHistoryKey" value="middleware.go&#9;FILE&#9;file:///Users/tab/go/src/github.com/ivanberry/rest-api/middleware/middleware.go" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544007871038" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544008144207" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
@@ -237,12 +234,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543469833271</updated>
       <workItem from="1543469834487" duration="4154000" />
-      <workItem from="1543625963757" duration="3222000" />
+      <workItem from="1543625963757" duration="3538000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7376000" />
+    <option name="totallyTimeSpent" value="7692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="38" width="1920" height="1080" extended-state="0" />
@@ -258,7 +255,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33299696" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36226034" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -308,23 +305,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
+    <entry file="file://$PROJECT_DIR$/middleware/middleware.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="812">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
           <folding>
-            <element signature="e#14#121#0" expanded="true" />
+            <element signature="e#20#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/middleware/middleware.go">
+    <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding>
-            <element signature="e#20#49#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="196">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>

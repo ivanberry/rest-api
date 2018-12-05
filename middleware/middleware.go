@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type middleware func(next http.HandlerFunc) http.HandlerFunc
+type Middleware func(next http.HandlerFunc) http.HandlerFunc
 
 func WithLogging(next http.HandlerFunc) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
@@ -21,7 +21,7 @@ func WithTracing(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-func ChainMiddleware(mw ...middleware) middleware {
+func ChainMiddleware(mw ...Middleware) Middleware {
 	return func(final http.HandlerFunc) http.HandlerFunc {
 		return func(writer http.ResponseWriter, request *http.Request) {
 			last := final
