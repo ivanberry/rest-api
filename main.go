@@ -8,9 +8,11 @@ import (
 	"github.com/ivanberry/rest-api/middleware"
 )
 
+var lt = middleware.ChainMiddleware(middleware.WithLogging, middleware.WithTracing)
+
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", middleware.WithLogging(middleware.WithTracing(GetIndex))).Methods("GET")
+	router.HandleFunc("/", lt(GetIndex) ).Methods("GET")
 	router.HandleFunc("/index", middleware.WithLogging(middleware.WithTracing(GetIndex))).Methods("GET")
 
 
