@@ -1,0 +1,4 @@
+package: github.com/ivanberry/rest-api
+import:
+- package: github.com/gorilla/mux
+  version: ~1.6.2
