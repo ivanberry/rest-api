@@ -19,6 +19,7 @@ func main() {
 	// db connect may not be this place
 	db := models.GetDB()
 	defer db.Close()
+	db.Debug().DropTable(&models.Account{})
 	db.AutoMigrate(&models.Account{}, &models.Contact{})
 
 	router := mux.NewRouter()

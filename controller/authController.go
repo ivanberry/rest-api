@@ -2,12 +2,16 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/ivanberry/rest-api/models"
 	"github.com/ivanberry/rest-api/utils"
 	"net/http"
 	)
 
 var CreateAccout = func(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	fmt.Println(params)
 	account := &models.Account{}
 
 	err := json.NewDecoder(r.Body).Decode(account)

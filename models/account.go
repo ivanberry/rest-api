@@ -3,14 +3,15 @@ package models
 import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/ivanberry/rest-api/utils"
+	"github.com/jinzhu/gorm"
 	"os"
 )
 
 type Account struct {
-	ID uint `gorm:"primary_key" sql:"type:INT(10) UNSIGNED NOT NULL"`
+	gorm.Model
 	Email string `json:"email"`
 	Password string `json:"password"`
-	Token string `json:"token"`
+	Token string `json:"token";sql:"-"`
 }
 
 type Token struct {
@@ -21,6 +22,10 @@ type Token struct {
 
 func (account *Account) Create() (map[string]interface{}) {
 	GetDB().Create(account)
+
+	if account.ID <= 0 {
+		return utils.Message(false, "Failed to create account, connection error.")
+	}
 
 	// Create JWT token for the newly registered account
 	tk := &Token{UserId:account.ID}
