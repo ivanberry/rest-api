@@ -5,6 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/ivanberry/rest-api/app"
+	"github.com/ivanberry/rest-api/controller"
 	"github.com/ivanberry/rest-api/middleware"
 	"github.com/ivanberry/rest-api/models"
 	"log"
@@ -23,7 +24,7 @@ func main() {
 	router := mux.NewRouter()
 	router.Use(app.JwtAuthentication)
 	router.HandleFunc("/", lt(GetIndex)).Methods("GET")
-	router.HandleFunc("/index", middleware.WithLogging(middleware.WithTracing(GetIndex))).Methods("GET")
+	router.HandleFunc("/api/user/login", lt(controllers.CreateAccout)).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
