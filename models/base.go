@@ -6,12 +6,17 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var db *gorm.DB
 
 func init()  {
-	if e := godotenv.Load(); e != nil {
+	cwd, _ := os.Getwd()
+
+	if e := godotenv.Load(cwd + "/config.env"); e != nil {
+
+		fmt.Println(e)
 		log.Fatal("Error loading .env file")
 	}
 

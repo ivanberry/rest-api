@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/ivanberry/rest-api/middleware"
 	"github.com/ivanberry/rest-api/models"
-	"github.com/jinzhu/gorm"
 	"log"
 	"net/http"
 )
@@ -13,11 +13,7 @@ import (
 var lt = middleware.ChainMiddleware(middleware.WithLogging, middleware.WithTracing)
 
 func main() {
-	dbUri := models.GetDB()
-	db, err := gorm.Open("mysql", dbUri)
-	if err != nil {
-		log.Fatal("Connect database error")
-	}
+	db := models.GetDB()
 
 	defer db.Close()
 	db.AutoMigrate(&models.Account{}, &models.Contact{})
