@@ -26,7 +26,7 @@ func init()  {
 
 	conn,err := gorm.Open("mysql", dbUri)
 	if err != nil {
-		log.Fatal("Connect dabase error")
+		log.Fatal("Connect database error")
 	}
 
 	db = conn
