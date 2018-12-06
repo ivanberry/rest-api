@@ -4,6 +4,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"github.com/ivanberry/rest-api/app"
 	"github.com/ivanberry/rest-api/middleware"
 	"github.com/ivanberry/rest-api/models"
 	"log"
@@ -13,12 +14,14 @@ import (
 var lt = middleware.ChainMiddleware(middleware.WithLogging, middleware.WithTracing)
 
 func main() {
-	db := models.GetDB()
 
+	// db connect may not be this place
+	db := models.GetDB()
 	defer db.Close()
 	db.AutoMigrate(&models.Account{}, &models.Contact{})
 
 	router := mux.NewRouter()
+	router.Use(app.JwtAuthentication)
 	router.HandleFunc("/", lt(GetIndex)).Methods("GET")
 	router.HandleFunc("/index", middleware.WithLogging(middleware.WithTracing(GetIndex))).Methods("GET")
 

@@ -1,12 +1,17 @@
 package app
 
 import (
+	"context"
+	"fmt"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/ivanberry/rest-api/models"
 	"github.com/ivanberry/rest-api/utils"
 	"net/http"
+	"os"
 	"strings"
 )
 
-var JwtAuthentication = func(next http.HandlerFunc) http.HandlerFunc {
+var JwtAuthentication = func(next http.Handler) http.Handler{
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		noNeedAuth := []string{"/api/user/new", "/api/user/login"}
 		requestPath := r.URL.Path
@@ -37,7 +42,32 @@ var JwtAuthentication = func(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		tokenPart := splitted[1]
-		//tk := &models.Token{}
+		tk := &models.Token{}
+
+		token, err := jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (i interface{}, e error) {
+			return []byte(os.Getenv("token_password")), nil
+		})
+
+		if err != nil {
+			response = utils.Message(false, "Malformed auth token")
+			w.WriteHeader(http.StatusForbidden)
+			w.Header().Add("Content-type", "application/json")
+			utils.Respond(w, response)
+			return
+		}
+
+		if !token.Valid {
+			response = utils.Message(false, "Token is not valid")
+			w.WriteHeader(http.StatusForbidden)
+			w.Header().Add("Content-type", "application/json")
+			utils.Respond(w, response)
+			return
+		}
+
+		fmt.Sprintf("User %", tk.UserId)
+		ctx := context.WithValue(r.Context(), "user", tk.UserId)
+		r = r.WithContext(ctx)
+		next.ServeHTTP(w, r)
 	})
 }
 
