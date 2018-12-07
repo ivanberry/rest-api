@@ -16,7 +16,6 @@ type Account struct {
 
 type Token struct {
 	UserId uint
-	UserName string
 	jwt.StandardClaims
 }
 

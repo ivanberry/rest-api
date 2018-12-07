@@ -19,6 +19,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler{
 		for _, value := range noNeedAuth {
 			if value == requestPath {
 				next.ServeHTTP(w, r)
+				return
 			}
 		}
 
@@ -28,7 +29,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler{
 		if tokenHeader == "" {
 			response = utils.Message(false, "Invalid auth token header.")
 			w.WriteHeader(http.StatusForbidden)
-			w.Header().Add("Content-Type", "appllication/json")
+			w.Header().Add("Content-Type", "application/json")
 			utils.Respond(w, response)
 			return
 		}
