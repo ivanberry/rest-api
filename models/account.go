@@ -44,9 +44,7 @@ func (account *Account) Validate() (map[string]interface{}, bool) {
 	if temp.Email != "" {
 		return utils.Message(false, "此邮箱已通过注册."), false
 	}
-
 	return utils.Message(true, "验证通过"), true
-
 }
 	
 
@@ -81,3 +79,51 @@ func (account *Account) Create() (map[string]interface{}) {
 	return response
 }
 
+
+/**
+Handle login
+0. get request body
+1. compare password
+2. return the particular resp
+ */
+func Login(email, password string) (map[string]interface{})  {
+
+	account := &Account{}
+
+	//fetch data from db with email
+	//and store the value to account if no err
+	err := GetDB().Table("account").Where("email = ?", email).First(account).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return utils.Message(false, "用户不存在")
+		}
+		return utils.Message(false, "链接错误")
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(account.Password), []byte(password))
+	if err != nil {
+		return utils.Message(false, "账户或密码错误")
+	}
+
+	account.Password = ""
+
+	// Login in success and return account info with jwt token
+	tk := &Token{UserId:account.ID}
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+
+	account.Token = tokenString
+	resp := utils.Message(true,"success")
+	resp["account"] = account
+	return resp
+}
+
+func Getuser(u uint) *Account  {
+	account := &Account{}
+	GetDB().Table("account").Where("id = ?", u).First(account)
+	if account.Email == "" {
+		return nil
+	}
+	account.Password = ""
+	return account
+}
