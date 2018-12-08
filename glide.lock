@@ -1,8 +1,26 @@
-hash: 9b825de265967baad73298b09862fcc6f534b44aaf806e5467a27466edac0805
-updated: 2018-12-06T08:59:46.870269+08:00
+hash: 6912c95d3a2c8f2e670626aa59cb99908ea33f23469f7341c1d1ea932c4d7cbd
+updated: 2018-12-08T10:00:30.766676+08:00
 imports:
+- name: github.com/dgrijalva/jwt-go
+  version: 3af4c746e1c248ee8491a3e0c6f7a9cd831e95f8
+- name: github.com/go-sql-driver/mysql
+  version: 60d456a402782453be397030407e34decaf04d73
 - name: github.com/gorilla/context
   version: 51ce91d2eaddeca0ef29a71d766bb3634dadf729
 - name: github.com/gorilla/mux
   version: e3702bed27f0d39777b0b37b664b6280e8ef8fbf
+- name: github.com/jinzhu/gorm
+  version: 472c70caa40267cb89fd8facb07fe6454b578626
+- name: github.com/jinzhu/inflection
+  version: 04140366298a54a039076d798123ffa108fff46c
+- name: github.com/joho/godotenv
+  version: 69ed1d913aa885da390dd6de9febf063d101b097
+- name: golang.org/x/crypto
+  version: 505ab145d0a99da450461ae2c1a9f6cd10d1f447
+  subpackages:
+  - bcrypt
+- name: google.golang.org/appengine
+  version: a37df1387b4521194676d88c79230c613610d5f4
+  subpackages:
+  - cloudsql
 testImports: []
