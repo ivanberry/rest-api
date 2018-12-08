@@ -8,6 +8,7 @@ import (
 	"github.com/ivanberry/rest-api/controller"
 	"github.com/ivanberry/rest-api/middleware"
 	"github.com/ivanberry/rest-api/models"
+	"github.com/rs/cors"
 	"log"
 	"net/http"
 )
@@ -27,7 +28,15 @@ func main() {
 	router.HandleFunc("/", lt(GetIndex)).Methods("GET")
 	router.HandleFunc("/api/user/login", lt(controllers.CreateAccout)).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":8000", router))
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowCredentials: true,
+	})
+
+	routerWithCorsAll := c.Handler(router)
+
+
+	log.Fatal(http.ListenAndServe(":8000", routerWithCorsAll))
 }
 
 func GetIndex(w http.ResponseWriter, r *http.Request) {
