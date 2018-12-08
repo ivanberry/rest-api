@@ -57,10 +57,10 @@ func (account *Account) Create() (map[string]interface{}) {
 	}
 
 	//Don't store the raw password, but the hash on
-
 	hashPassword, _ := bcrypt.GenerateFromPassword([]byte(account.Password), bcrypt.DefaultCost)
 	account.Password = string(hashPassword)
 
+	//TODO: how to store the jwt token
 	GetDB().Create(account)
 
 	if account.ID <= 0 {
@@ -73,7 +73,7 @@ func (account *Account) Create() (map[string]interface{}) {
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
 	account.Token = tokenString
 
-	// auto ignore nil value
+	//TODO: auto ignore nil value
 	account.Password = ""
 
 	response := utils.Message(true, "用户创建成功")
