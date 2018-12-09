@@ -34,3 +34,17 @@ var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 	//w.Header().Add("Authenticate", "Bear " + resp.account)
 	utils.Respond(w, resp)
 }
+
+var GetUserInfo = func(w http.ResponseWriter, r *http.Request) {
+
+	userId := r.Context().Value("user").(uint);
+	acc := models.Getuser(userId)
+
+	if acc == nil {
+		utils.Message(false, "用户不存在")
+	}
+
+	resp := utils.Message(true, "success")
+	resp["user"] = acc;
+	utils.Respond(w, resp)
+}
