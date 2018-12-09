@@ -26,7 +26,8 @@ func main() {
 	router := mux.NewRouter()
 	router.Use(app.JwtAuthentication)
 	router.HandleFunc("/", lt(GetIndex)).Methods("GET")
-	router.HandleFunc("/api/user/login", lt(controllers.CreateAccout)).Methods("POST")
+	router.HandleFunc("/api/user/new", lt(controllers.CreateAccout)).Methods("POST")
+	router.HandleFunc("/api/user/login", lt(controllers.Authenticate)).Methods("POST")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:3000"},

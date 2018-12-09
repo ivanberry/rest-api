@@ -21,6 +21,7 @@ type Token struct {
 	jwt.StandardClaims
 }
 
+
 func (account *Account) Validate() (map[string]interface{}, bool) {
 
 	// validate emial
@@ -112,12 +113,16 @@ func Login(email, password string) (map[string]interface{})  {
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
 
-	account.Token = tokenString
 	resp := utils.Message(true,"success")
 	resp["account"] = account
+	resp["token"] = tokenString
 	return resp
 }
 
+
+/**
+get User infos with id
+ */
 func Getuser(u uint) *Account  {
 	account := &Account{}
 	GetDB().Table("account").Where("id = ?", u).First(account)

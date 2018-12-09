@@ -19,3 +19,18 @@ var CreateAccout = func(w http.ResponseWriter, r *http.Request) {
 	resp := account.Create()
 	utils.Respond(w, resp)
 }
+
+var Authenticate = func(w http.ResponseWriter, r *http.Request) {
+	// model variable to populate
+	account := &models.Account{}
+	err := json.NewDecoder(r.Body).Decode(account)
+	if err != nil {
+		utils.Respond(w, utils.Message(false, "入参错误"))
+		return
+	}
+
+	// login
+	resp := models.Login(account.Email, account.Password)
+	//w.Header().Add("Authenticate", "Bear " + resp.account)
+	utils.Respond(w, resp)
+}
