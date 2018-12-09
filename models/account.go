@@ -109,7 +109,9 @@ func Login(email, password string) (map[string]interface{})  {
 	account.Password = ""
 
 	// Login in success and return account info with jwt token
-	tk := &Token{UserId:account.ID}
+	tk := &Token{account.ID, jwt.StandardClaims{
+		ExpiresAt: 600,
+	}}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
 
