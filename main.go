@@ -29,6 +29,8 @@ func main() {
 	router.HandleFunc("/api/user/login", lt(controllers.Authenticate)).Methods("POST")
 	router.HandleFunc("/api/userInfo", lt(controllers.GetUserInfo)).Methods("GET")
 	router.HandleFunc("/api/post/new", lt(controllers.CreatePost)).Methods("POST")
+	router.HandleFunc("/api/post/{id:[0-9]+}", lt(controllers.GetPost)).Methods("GET")
+
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }

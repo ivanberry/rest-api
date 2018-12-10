@@ -44,3 +44,12 @@ func (post *Post) Create() (map[string]interface{}) {
 
 }
 
+func Get(id uint64) *Post {
+	po := &Post{}
+	GetDB().Table("post").Where("id = ?", id).First(po)
+	if po.Title == "" {
+		return nil
+	}
+	return po
+}
+

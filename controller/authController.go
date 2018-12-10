@@ -37,6 +37,7 @@ var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 
 var GetUserInfo = func(w http.ResponseWriter, r *http.Request) {
 
+	// 通过鉴权时，写入ctx用户信息
 	userId := r.Context().Value("user").(uint);
 	acc := models.Getuser(userId)
 
