@@ -7,6 +7,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"os"
 	"strings"
+	"time"
 )
 
 type Account struct {
@@ -21,10 +22,9 @@ type Token struct {
 	jwt.StandardClaims
 }
 
-
 func (account *Account) Validate() (map[string]interface{}, bool) {
 
-	// validate emial
+	// validate email
 	if !strings.Contains(account.Email, "@") {
 		return utils.Message(false, "请输入邮箱地址."), false
 	}
@@ -55,7 +55,7 @@ func (account *Account) Create() (map[string]interface{}) {
 		return resp
 	}
 
-	//Don't store the raw password, but the hash on
+	//Don't store the raw password, but the hashed one
 	hashPassword, _ := bcrypt.GenerateFromPassword([]byte(account.Password), bcrypt.DefaultCost)
 	account.Password = string(hashPassword)
 
@@ -108,9 +108,11 @@ func Login(email, password string) (map[string]interface{})  {
 
 	account.Password = ""
 
+	exp := time.Now().Add(time.Hour * 72).Unix()
+
 	// Login in success and return account info with jwt token
 	tk := &Token{account.ID, jwt.StandardClaims{
-		ExpiresAt: 600,
+		ExpiresAt: exp,
 	}}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))

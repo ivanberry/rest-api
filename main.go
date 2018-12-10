@@ -19,8 +19,8 @@ func main() {
 	// db connect may not be this place
 	db := models.GetDB()
 	defer db.Close()
-	db.Debug().DropTable(&models.Account{})
-	db.AutoMigrate(&models.Account{}, &models.Contact{})
+	db.Debug().DropTable(&models.Post{})
+	db.AutoMigrate(&models.Account{}, &models.Post{})
 
 	router := mux.NewRouter()
 	router.Use(app.JwtAuthentication)
@@ -28,6 +28,7 @@ func main() {
 	router.HandleFunc("/api/user/new", lt(controllers.CreateAccout)).Methods("POST")
 	router.HandleFunc("/api/user/login", lt(controllers.Authenticate)).Methods("POST")
 	router.HandleFunc("/api/userInfo", lt(controllers.GetUserInfo)).Methods("GET")
+	router.HandleFunc("/api/post/new", lt(controllers.CreatePost)).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
